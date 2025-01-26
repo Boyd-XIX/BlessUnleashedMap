@@ -1,5 +1,5 @@
 This is a interactive map for Bless Unleashed
-https://jerzean.github.io/BlessMap/
+[https://jerzean.github.io/BlessMap/](https://boyd-xix.github.io/BlessUnleashedMap/)
 
 Made by Nareon#0 on discord
 
