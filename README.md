@@ -1,7 +1,7 @@
 This is a interactive map for Bless Unleashed
 [https://jerzean.github.io/BlessMap/](https://boyd-xix.github.io/BlessUnleashedMap/)
 
-Made by Nareon#0 on discord
+Credits to Nareon for the base map. l3oyd for map updates and .hexc0de for code update.
 
 instructions to add items
 1. Click/create a temp marker where said item should be
