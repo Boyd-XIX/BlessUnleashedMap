@@ -71,7 +71,10 @@
             attribution: 'Made by <a href="https://discordapp.com/channels/@me/Nareon/">Nareon</a>'
         }).addTo(map);
 
-        // Define categories and their markers
+	// Add layer control to the map
+        L.control.layers(null, overlayMaps).addTo(map);
+	
+        // Define categories and their markers    
         var categories = [
             {
                 name: "Bag Piece",
