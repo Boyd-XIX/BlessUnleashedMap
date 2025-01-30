@@ -1095,6 +1095,16 @@
             tempMarkerLayer.clearLayers();
         });
 
+		        // Search control
+				var = new L.Control.Search({
+            layer: markersLayer,
+            initial: false,
+            zoom: 12,
+            marker: false
+        });
+
+        map.addControl();
+
         // Add text overlays for countries and cities
         var locations = [
             {
