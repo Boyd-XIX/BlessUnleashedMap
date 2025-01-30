@@ -1095,15 +1095,18 @@
             tempMarkerLayer.clearLayers();
         });
 
-		        // Search control
-		        var = new L.contrl.search({
+        // Search control
+        var searchControl = new L.Control.Search({
             layer: markersLayer,
             initial: false,
             zoom: 12,
             marker: false
         });
 
-        map.addControl();
+        map.addControl(searchControl);
+
+        // Add text overlays for countries and cities
+        var locations = [
 
         // Add text overlays for countries and cities
         var locations = [
