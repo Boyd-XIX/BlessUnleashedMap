@@ -1114,15 +1114,6 @@
             // Create a layer group for the category
             var layerGroup = L.layerGroup();
 
-            // Add markers to the layer group and search layer
-            category.markers.forEach(function(marker) {
-                var markerInstance = L.marker([marker.lat, marker.lng], {icon: icon, title: marker.title})
-                    .bindPopup(marker.popup);
-                layerGroup.addLayer(markerInstance);
-                markersLayer.addLayer(markerInstance); // Add to search layer
-                
-            });
-
             // Add the layer group to the map
             layerGroup.addTo(map);
 
