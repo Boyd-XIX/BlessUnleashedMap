@@ -107,6 +107,7 @@
     <div id="sidebar">
         <h2>Categories</h2>
         <ul id="category-list"></ul>
+        <br><button id="clear-markers">Clear Markers</button>
     </div>
     <div id="map"></div>
     <script>
@@ -1114,6 +1115,15 @@
             // Create a layer group for the category
             var layerGroup = L.layerGroup();
 
+            // Add markers to the layer group and search layer
+            category.markers.forEach(function(marker) {
+                var markerInstance = L.marker([marker.lat, marker.lng], {icon: icon, title: marker.title})
+                    .bindPopup(marker.popup);
+                layerGroup.addLayer(markerInstance);
+                markersLayer.addLayer(markerInstance); // Add to search layer
+                
+            });
+
             // Add the layer group to the map
             layerGroup.addTo(map);
 
@@ -1143,6 +1153,35 @@
                     map.removeLayer(layerGroup);
                 }
             });
+        });
+
+        // Add layer control to the map
+        //L.control.layers(null, overlayMaps).addTo(map);
+
+        // Create a layer group for temporary markers
+        var tempMarkerLayer = L.layerGroup().addTo(map);
+
+        // Add event listener to place temporary markers
+        map.on('click', function(e) {
+            var latlng = e.latlng;
+            var formattedData = `{lat: ${latlng.lat.toFixed(5)}, lng: ${latlng.lng.toFixed(5)}, popup: "Bag Piece", title: "-"},`;
+            var tempMarker = L.marker(latlng, {
+                draggable: true // Make the marker draggable
+            }).addTo(tempMarkerLayer);
+            tempMarker.bindPopup("Temporary Marker<br>Lat: " + latlng.lat.toFixed(5) + "<br>Lng: " + latlng.lng.toFixed(5) + "<br><br>Formatted Data:<br>" + formattedData).openPopup();
+
+            // Update popup with new coordinates on marker drag
+            tempMarker.on('dragend', function(event) {
+                var marker = event.target;
+                var position = marker.getLatLng();
+                var formattedData = `{lat: ${position.lat.toFixed(5)}, lng: ${position.lng.toFixed(5)}, popup: "Bag Piece", title: "-"},`;
+                marker.setPopupContent("Temporary Marker<br>Lat: " + position.lat.toFixed(5) + "<br>Lng: " + position.lng.toFixed(5) + "<br><br>Formatted Data:<br>" + formattedData).openPopup();
+            });
+        });
+
+        // Clear temporary markers
+        document.getElementById('clear-markers').addEventListener('click', function() {
+            tempMarkerLayer.clearLayers();
         });
 
         // Search control
