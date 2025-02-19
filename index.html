@@ -1217,17 +1217,28 @@
 
             // Add markers to the layer group and search layer
             category.markers.forEach(function(marker) {
+			    // Let’s create popup options with a bigger width (e.g., 600px).
+                var popupOptions = {
+                minWidth: 300,
+                maxWidth: 600
+                };
+                // Use backticks for a multiline template literal
                 var popupContent = `
-                   <div style="text-align:center;">
-                   <img src="${marker.img}" style="width:500px;height:600px;" /><br>
-                   ${marker.popup}
-                   </div>
-                   `;
-                var markerInstance = L.marker([marker.lat, marker.lng], {icon: icon, title: marker.title})
-                    .bindPopup(marker.popupContent);
+                <div style="text-align:center;">
+                <img src="${marker.img}" style="max-width: 100%; height: auto;" /><br>
+                ${marker.popup}
+                </div>
+                `;
+
+                var markerInstance = L.marker([marker.lat, marker.lng], {
+                icon: icon,
+                title: marker.title
+                })
+                // Use the local variable popupContent
+                .bindPopup(popupContent, popupOptions);
+
                 layerGroup.addLayer(markerInstance);
-                markersLayer.addLayer(markerInstance); // Add to search layer
-                
+                markersLayer.addLayer(markerInstance);
             });
 
             // Add the layer group to the map
